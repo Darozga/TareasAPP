@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Repos\\TareasApp\\WebAPI\\WebAPI.Model\\WebAPI.Model.csproj": {}
+    "C:\\Repos\\TareasApp\\WebAPI.Model\\WebAPI.Model.csproj": {}
   },
   "projects": {
-    "C:\\Repos\\TareasApp\\WebAPI\\WebAPI.Model\\WebAPI.Model.csproj": {
+    "C:\\Repos\\TareasApp\\WebAPI.Model\\WebAPI.Model.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Repos\\TareasApp\\WebAPI\\WebAPI.Model\\WebAPI.Model.csproj",
+        "projectUniqueName": "C:\\Repos\\TareasApp\\WebAPI.Model\\WebAPI.Model.csproj",
         "projectName": "WebAPI.Model",
-        "projectPath": "C:\\Repos\\TareasApp\\WebAPI\\WebAPI.Model\\WebAPI.Model.csproj",
+        "projectPath": "C:\\Repos\\TareasApp\\WebAPI.Model\\WebAPI.Model.csproj",
         "packagesPath": "C:\\Users\\danie\\.nuget\\packages\\",
-        "outputPath": "C:\\Repos\\TareasApp\\WebAPI\\WebAPI.Model\\obj\\",
+        "outputPath": "C:\\Repos\\TareasApp\\WebAPI.Model\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\danie\\AppData\\Roaming\\NuGet\\NuGet.Config",

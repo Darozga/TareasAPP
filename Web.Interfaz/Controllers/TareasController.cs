@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Web;
@@ -29,23 +30,38 @@ namespace Web.Interfaz.Controllers
         /// </summary>
         public ActionResult Index()
         {
-            var errMsg = TempData["ErrorMessage"] as string;
-
-            Respuesta<IEnumerable<TareaModel>> objRespuesta = new Respuesta<IEnumerable<TareaModel>>();
-            cargarListas();
-            HttpResponseMessage response = client.GetAsync(client.BaseAddress + "/tareas").Result;
-            if (response.IsSuccessStatusCode)
+            try
             {
-                string data = response.Content.ReadAsStringAsync().Result;
-                objRespuesta = JsonConvert.DeserializeObject<Respuesta<IEnumerable<TareaModel>>>(data);
+                var errMsg = TempData["ErrorMessage"] as string;
+
+                Respuesta<IEnumerable<TareaModel>> objRespuesta = new Respuesta<IEnumerable<TareaModel>>();
+                cargarListas();
+                HttpResponseMessage response = client.GetAsync(client.BaseAddress + "/tareas").Result;
+                if (response.IsSuccessStatusCode)
+                {
+
+                    string data = response.Content.ReadAsStringAsync().Result;
+                    objRespuesta = JsonConvert.DeserializeObject<Respuesta<IEnumerable<TareaModel>>>(data);
+
+                }
+                else
+                {
+                    return View("Error");
+                }
+                if (errMsg != null)
+                {
+                    ModelState.AddModelError("Error", errMsg);
+
+                }
+
+                return View(objRespuesta.ValorRetorno);
             }
-            if (errMsg != null)
+            catch (Exception)
             {
-                ModelState.AddModelError("Error", errMsg);
 
+                return View("Error");
             }
 
-            return View(objRespuesta.ValorRetorno);
         }
 
         /// <summary>        
@@ -54,24 +70,46 @@ namespace Web.Interfaz.Controllers
         [HttpPost]
         public ActionResult Index(FilterModel filtros)
         {
-            Respuesta<IEnumerable<TareaModel>> objRespuesta = new Respuesta<IEnumerable<TareaModel>>();
-            string data = JsonConvert.SerializeObject(filtros);
-            StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
-            HttpResponseMessage response = client.PostAsync(client.BaseAddress + "/tareas/filtro", content).Result;
-            cargarListas();
-            if (response.IsSuccessStatusCode)
+            try
             {
-                string data1 = response.Content.ReadAsStringAsync().Result;
-                objRespuesta = JsonConvert.DeserializeObject<Respuesta<IEnumerable<TareaModel>>>(data1);
+                Respuesta<IEnumerable<TareaModel>> objRespuesta = new Respuesta<IEnumerable<TareaModel>>();
+                string data = JsonConvert.SerializeObject(filtros);
+                StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
+                HttpResponseMessage response = client.PostAsync(client.BaseAddress + "/tareas/filtro", content).Result;
+                cargarListas();
+                if (response.IsSuccessStatusCode)
+                {
+                    string data1 = response.Content.ReadAsStringAsync().Result;
+                    objRespuesta = JsonConvert.DeserializeObject<Respuesta<IEnumerable<TareaModel>>>(data1);
+                }
+                else
+                {
+                    return View("Error");
+                }
+                return View(objRespuesta.ValorRetorno);
             }
-            return View(objRespuesta.ValorRetorno);
+            catch (Exception)
+            {
+                return View("Error");
+
+            }
+
 
         }
 
         public ActionResult Create()
         {
-            cargarListas();
-            return View();
+            try
+            {
+                cargarListas();
+                return View();
+            }
+            catch (Exception)
+            {
+                return View("Error");
+
+            }
+
         }
 
         /// <summary>        
@@ -80,35 +118,45 @@ namespace Web.Interfaz.Controllers
         /// </summary>
         public void cargarListas()
         {
-            Respuesta<IEnumerable<ColaboradorModel>> objRespuesta = new Respuesta<IEnumerable<ColaboradorModel>>();
-
-            HttpResponseMessage response = client.GetAsync(client.BaseAddress + "/colaborador").Result;
-            if (response.IsSuccessStatusCode)
+            try
             {
-                string data = response.Content.ReadAsStringAsync().Result;
-                objRespuesta = JsonConvert.DeserializeObject<Respuesta<IEnumerable<ColaboradorModel>>>(data);
-                ViewBag.colaboradores = objRespuesta.ValorRetorno;
+                Respuesta<IEnumerable<ColaboradorModel>> objRespuesta = new Respuesta<IEnumerable<ColaboradorModel>>();
+
+                HttpResponseMessage response = client.GetAsync(client.BaseAddress + "/colaborador").Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    string data = response.Content.ReadAsStringAsync().Result;
+                    objRespuesta = JsonConvert.DeserializeObject<Respuesta<IEnumerable<ColaboradorModel>>>(data);
+                    ViewBag.colaboradores = objRespuesta.ValorRetorno;
+                }
+
+
+                Respuesta<IEnumerable<PrioridadModel>> RespuestaPrioridades = new Respuesta<IEnumerable<PrioridadModel>>();
+
+                HttpResponseMessage responsePrioridades = client.GetAsync(client.BaseAddress + "/prioridad").Result;
+                if (responsePrioridades.IsSuccessStatusCode)
+                {
+                    string data = responsePrioridades.Content.ReadAsStringAsync().Result;
+                    RespuestaPrioridades = JsonConvert.DeserializeObject<Respuesta<IEnumerable<PrioridadModel>>>(data);
+                    ViewBag.prioridades = RespuestaPrioridades.ValorRetorno;
+                }
+
+                Respuesta<IEnumerable<EstadoModel>> RespuestaEstados = new Respuesta<IEnumerable<EstadoModel>>();
+
+                HttpResponseMessage responseEstado = client.GetAsync(client.BaseAddress + "/estado").Result;
+                if (responseEstado.IsSuccessStatusCode)
+                {
+                    string data = responseEstado.Content.ReadAsStringAsync().Result;
+                    RespuestaEstados = JsonConvert.DeserializeObject<Respuesta<IEnumerable<EstadoModel>>>(data);
+                    ViewBag.estados = RespuestaEstados.ValorRetorno;
+                }
             }
-
-            Respuesta<IEnumerable<PrioridadModel>> RespuestaPrioridades = new Respuesta<IEnumerable<PrioridadModel>>();
-
-            HttpResponseMessage responsePrioridades = client.GetAsync(client.BaseAddress + "/prioridad").Result;
-            if (responsePrioridades.IsSuccessStatusCode)
+            catch (Exception)
             {
-                string data = responsePrioridades.Content.ReadAsStringAsync().Result;
-                RespuestaPrioridades = JsonConvert.DeserializeObject<Respuesta<IEnumerable<PrioridadModel>>>(data);
-                ViewBag.prioridades = RespuestaPrioridades.ValorRetorno;
-            }
 
-            Respuesta<IEnumerable<EstadoModel>> RespuestaEstados = new Respuesta<IEnumerable<EstadoModel>>();
-
-            HttpResponseMessage responseEstado = client.GetAsync(client.BaseAddress + "/estado").Result;
-            if (responseEstado.IsSuccessStatusCode)
-            {
-                string data = responseEstado.Content.ReadAsStringAsync().Result;
-                RespuestaEstados = JsonConvert.DeserializeObject<Respuesta<IEnumerable<EstadoModel>>>(data);
-                ViewBag.estados = RespuestaEstados.ValorRetorno;
+                throw;
             }
+            
         }
 
         /// <summary>        
@@ -117,30 +165,44 @@ namespace Web.Interfaz.Controllers
         [HttpPost]
         public ActionResult Create(TareaModel obj, FormCollection form)
         {
-
-            if (ModelState.IsValid)
+            try
             {
-                cargarListas();
-                if (obj.Fecha_Inicio > obj.Fecha_Fin)
+                if (ModelState.IsValid)
                 {
-                    ModelState.AddModelError("CustomError", "La fecha de incio no puede ser menor a la fecha fin.");
-                    return View(obj);
-                }
+                    cargarListas();
+                    if (obj.Fecha_Inicio > obj.Fecha_Fin)
+                    {
+                        ModelState.AddModelError("CustomError", "La fecha de incio no puede ser menor a la fecha fin.");
+                        return View(obj);
+                    }
 
-                if (obj.Colaborador_Id == null && obj.Estado_Id != 1)
+                    if (obj.Colaborador_Id == null && obj.Estado_Id != 1)
+                    {
+                        ModelState.AddModelError("CustomError", "Debes selecionar un colaborador");
+                        return View(obj);
+                    }
+                }
+                string data = JsonConvert.SerializeObject(obj);
+                StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
+                HttpResponseMessage response = client.PostAsync(client.BaseAddress + "/tareas", content).Result;
+                if (response.IsSuccessStatusCode)
                 {
-                    ModelState.AddModelError("CustomError", "Debes selecionar un colaborador");
-                    return View(obj);
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    return View("Error");
                 }
             }
-            string data = JsonConvert.SerializeObject(obj);
-            StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
-            HttpResponseMessage response = client.PostAsync(client.BaseAddress + "/tareas", content).Result;
-            if (response.IsSuccessStatusCode)
+            catch (Exception)
             {
-                return RedirectToAction("Index");
+
+                return View("Error");
+
             }
-            return RedirectToAction("Create");
+
+
+
         }
 
         /// <summary>        
@@ -148,15 +210,28 @@ namespace Web.Interfaz.Controllers
         /// </summary>
         public ActionResult Editar(int id)
         {
-            Respuesta<TareaModel> objRespuesta = new Respuesta<TareaModel>();
-            HttpResponseMessage responseTareas = client.GetAsync(client.BaseAddress + "/tareas/" + id).Result;
-            if (responseTareas.IsSuccessStatusCode)
+            try
             {
-                string data = responseTareas.Content.ReadAsStringAsync().Result;
-                objRespuesta = JsonConvert.DeserializeObject<Respuesta<TareaModel>>(data);
+                Respuesta<TareaModel> objRespuesta = new Respuesta<TareaModel>();
+                HttpResponseMessage responseTareas = client.GetAsync(client.BaseAddress + "/tareas/" + id).Result;
+                if (responseTareas.IsSuccessStatusCode)
+                {
+                    string data = responseTareas.Content.ReadAsStringAsync().Result;
+                    objRespuesta = JsonConvert.DeserializeObject<Respuesta<TareaModel>>(data);
+                }
+                else
+                {
+                    return View("Error");
+                }
+                cargarListas();
+                return View("Editar", objRespuesta.ValorRetorno);
             }
-            cargarListas();
-            return View("Editar", objRespuesta.ValorRetorno);
+            catch (Exception)
+            {
+
+                return View("Error");
+            }
+
         }
 
         /// <summary>        
@@ -165,14 +240,28 @@ namespace Web.Interfaz.Controllers
         [HttpGet]
         public ActionResult Eliminar(int id, int estado)
         {
-            Respuesta<bool> objRespuesta = new Respuesta<bool>();
-            HttpResponseMessage responseTareas = client.DeleteAsync(client.BaseAddress + "/tareas/" + id).Result;
-            if (responseTareas.IsSuccessStatusCode)
+            try
             {
-                string data = responseTareas.Content.ReadAsStringAsync().Result;
-                objRespuesta = JsonConvert.DeserializeObject<Respuesta<bool>>(data);
+                Respuesta<bool> objRespuesta = new Respuesta<bool>();
+                HttpResponseMessage responseTareas = client.DeleteAsync(client.BaseAddress + "/tareas/" + id).Result;
+                if (responseTareas.IsSuccessStatusCode)
+                {
+                    string data = responseTareas.Content.ReadAsStringAsync().Result;
+                    objRespuesta = JsonConvert.DeserializeObject<Respuesta<bool>>(data);
+                }
+                else
+                {
+                    return View("Error");
+                }
+                return RedirectToAction("Index");
             }
-            return RedirectToAction("Index");
+            catch (Exception)
+            {
+
+                return View("Error");
+
+            }
+
         }
 
         /// <summary>        
@@ -181,30 +270,43 @@ namespace Web.Interfaz.Controllers
         [HttpPost]
         public ActionResult Editar(TareaModel obj, FormCollection form)
         {
-            if (ModelState.IsValid)
+            try
             {
-                cargarListas();
-                if (obj.Fecha_Inicio > obj.Fecha_Fin)
+                if (ModelState.IsValid)
                 {
-                    ModelState.AddModelError("CustomError", "La fecha de incio no puede ser menor a la fecha fin.");
-                    return View(obj);
+                    cargarListas();
+                    if (obj.Fecha_Inicio > obj.Fecha_Fin)
+                    {
+                        ModelState.AddModelError("CustomError", "La fecha de incio no puede ser menor a la fecha fin.");
+                        return View(obj);
+                    }
+
+                    if (obj.Colaborador_Id == null && obj.Estado_Id != 1)
+                    {
+                        ModelState.AddModelError("CustomError", "Debes selecionar un colaborador");
+                        return View(obj);
+                    }
                 }
 
-                if (obj.Colaborador_Id == null && obj.Estado_Id != 1)
+                string data = JsonConvert.SerializeObject(obj);
+                StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
+                HttpResponseMessage response = client.PutAsync(client.BaseAddress + "/tareas", content).Result;
+                if (response.IsSuccessStatusCode)
                 {
-                    ModelState.AddModelError("CustomError", "Debes selecionar un colaborador");
-                    return View(obj);
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    return View("Error");
                 }
             }
-
-            string data = JsonConvert.SerializeObject(obj);
-            StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
-            HttpResponseMessage response = client.PutAsync(client.BaseAddress + "/tareas", content).Result;
-            if (response.IsSuccessStatusCode)
+            catch (Exception)
             {
-                return RedirectToAction("Index");
+
+                return View("Error");
             }
-            return View("Create", obj);
+
+
         }
     }
 }

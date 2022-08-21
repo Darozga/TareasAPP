@@ -10,3 +10,15 @@ C:\Repos\TareasApp\WebAPI\WebAPI.Model\obj\Debug\net6.0\WebAPI.Model.dll
 C:\Repos\TareasApp\WebAPI\WebAPI.Model\obj\Debug\net6.0\refint\WebAPI.Model.dll
 C:\Repos\TareasApp\WebAPI\WebAPI.Model\obj\Debug\net6.0\WebAPI.Model.pdb
 C:\Repos\TareasApp\WebAPI\WebAPI.Model\obj\Debug\net6.0\ref\WebAPI.Model.dll
+C:\Repos\TareasApp\WebAPI.Model\bin\Debug\net6.0\WebAPI.Model.deps.json
+C:\Repos\TareasApp\WebAPI.Model\bin\Debug\net6.0\WebAPI.Model.dll
+C:\Repos\TareasApp\WebAPI.Model\bin\Debug\net6.0\WebAPI.Model.pdb
+C:\Repos\TareasApp\WebAPI.Model\obj\Debug\net6.0\WebAPI.Model.csproj.AssemblyReference.cache
+C:\Repos\TareasApp\WebAPI.Model\obj\Debug\net6.0\WebAPI.Model.GeneratedMSBuildEditorConfig.editorconfig
+C:\Repos\TareasApp\WebAPI.Model\obj\Debug\net6.0\WebAPI.Model.AssemblyInfoInputs.cache
+C:\Repos\TareasApp\WebAPI.Model\obj\Debug\net6.0\WebAPI.Model.AssemblyInfo.cs
+C:\Repos\TareasApp\WebAPI.Model\obj\Debug\net6.0\WebAPI.Model.csproj.CoreCompileInputs.cache
+C:\Repos\TareasApp\WebAPI.Model\obj\Debug\net6.0\WebAPI.Model.dll
+C:\Repos\TareasApp\WebAPI.Model\obj\Debug\net6.0\refint\WebAPI.Model.dll
+C:\Repos\TareasApp\WebAPI.Model\obj\Debug\net6.0\WebAPI.Model.pdb
+C:\Repos\TareasApp\WebAPI.Model\obj\Debug\net6.0\ref\WebAPI.Model.dll

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "w9CjVin+jplcyM/vZywKBEm6sYfi1feWR9QncLD9ShNijn0mX+qH50SV44b7uQk9+roztPW1nn2oy2Ul3ViaNA==",
+  "dgSpecHash": "OjBOtlz/K9aJnpEv9n2vYfj5KCRgopxK05ZUAWIH07O7hPPPJODvHjjlrddEoL5hrquCQUI4s6ZgxZoxJyuYTA==",
   "success": true,
-  "projectFilePath": "C:\\Repos\\TareasApp\\WebAPI\\WebAPI\\WebAPI.csproj",
+  "projectFilePath": "C:\\Repos\\TareasApp\\WebAPI\\WebAPI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\danie\\.nuget\\packages\\dapper\\2.0.123\\dapper.2.0.123.nupkg.sha512",
     "C:\\Users\\danie\\.nuget\\packages\\microsoft.extensions.apidescription.server\\3.0.0\\microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",

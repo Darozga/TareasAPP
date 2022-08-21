@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "IeFbqUf3lLGOqUk4qpEN8ptZ4bhLTlBaXTzuqG2W4vhWnKWX5dwgvWaZeuPZ92c8wSxvpNDM+5giNZbLhtyb7g==",
+  "dgSpecHash": "BeXgq1fx/J4y94Bfnj4Q93Va3tdQWDBkC0wfYXeWEKl4fz/aK/7NRyodf/WpcyyUwuj12q+Nu73TA5C0FyH18A==",
   "success": true,
-  "projectFilePath": "C:\\Repos\\TareasApp\\WebAPI\\WebAPI.Data\\WebAPI.Data.csproj",
+  "projectFilePath": "C:\\Repos\\TareasApp\\WebAPI.Data\\WebAPI.Data.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\danie\\.nuget\\packages\\dapper\\2.0.123\\dapper.2.0.123.nupkg.sha512",
     "C:\\Users\\danie\\.nuget\\packages\\npgsql\\6.0.6\\npgsql.6.0.6.nupkg.sha512",

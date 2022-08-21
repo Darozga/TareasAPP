@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "cRRdrPTz38mmRcryJuDJ1iTHCM0xb4gTb42nb1/dGcmif/M+mnx1Sd5UIMk3Tz8RL979E81HaYRYTi9Ytx58EA==",
+  "dgSpecHash": "wbqF2DRDSsEZTY39jky39HGEo4pCyIbWLvFmijvHjQRF6bLYvm9ThUw1SorH+JaL7nfh05enuG3mdHk5rd6UCA==",
   "success": true,
-  "projectFilePath": "C:\\Repos\\TareasApp\\WebAPI\\WebAPI.Model\\WebAPI.Model.csproj",
+  "projectFilePath": "C:\\Repos\\TareasApp\\WebAPI.Model\\WebAPI.Model.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }
