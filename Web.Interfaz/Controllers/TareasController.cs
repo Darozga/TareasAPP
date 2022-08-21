@@ -42,7 +42,12 @@ namespace Web.Interfaz.Controllers
 
                     string data = response.Content.ReadAsStringAsync().Result;
                     objRespuesta = JsonConvert.DeserializeObject<Respuesta<IEnumerable<TareaModel>>>(data);
-
+                    if (!objRespuesta.Success)
+                    {
+                        Error errorMessage = new Error();
+                        errorMessage.ErrorMessage = objRespuesta.strMensajeRespuesta;
+                        return View("Error", errorMessage);
+                    }
                 }
                 else
                 {
@@ -81,6 +86,12 @@ namespace Web.Interfaz.Controllers
                 {
                     string data1 = response.Content.ReadAsStringAsync().Result;
                     objRespuesta = JsonConvert.DeserializeObject<Respuesta<IEnumerable<TareaModel>>>(data1);
+                    if (!objRespuesta.Success)
+                    {
+                        Error errorMessage = new Error();
+                        errorMessage.ErrorMessage = objRespuesta.strMensajeRespuesta;
+                        return View("Error", errorMessage);
+                    }
                 }
                 else
                 {
@@ -183,10 +194,19 @@ namespace Web.Interfaz.Controllers
                     }
                 }
                 string data = JsonConvert.SerializeObject(obj);
+                Respuesta<bool> objRespuesta = new Respuesta<bool>();
                 StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
                 HttpResponseMessage response = client.PostAsync(client.BaseAddress + "/tareas", content).Result;
                 if (response.IsSuccessStatusCode)
                 {
+                    string respuestaApi = response.Content.ReadAsStringAsync().Result;
+                    objRespuesta = JsonConvert.DeserializeObject<Respuesta<bool>>(respuestaApi);
+                    if (!objRespuesta.Success)
+                    {
+                        Error errorMessage = new Error();
+                        errorMessage.ErrorMessage = objRespuesta.strMensajeRespuesta;
+                        return View("Error", errorMessage);
+                    }
                     return RedirectToAction("Index");
                 }
                 else
@@ -212,12 +232,19 @@ namespace Web.Interfaz.Controllers
         {
             try
             {
+                Error errorMessage = new Error();
                 Respuesta<TareaModel> objRespuesta = new Respuesta<TareaModel>();
                 HttpResponseMessage responseTareas = client.GetAsync(client.BaseAddress + "/tareas/" + id).Result;
                 if (responseTareas.IsSuccessStatusCode)
                 {
                     string data = responseTareas.Content.ReadAsStringAsync().Result;
                     objRespuesta = JsonConvert.DeserializeObject<Respuesta<TareaModel>>(data);
+                    if (!objRespuesta.Success)
+                    {
+                        
+                        errorMessage.ErrorMessage = objRespuesta.strMensajeRespuesta;
+                        return View("Error", errorMessage);
+                    }
                 }
                 else
                 {
@@ -248,6 +275,12 @@ namespace Web.Interfaz.Controllers
                 {
                     string data = responseTareas.Content.ReadAsStringAsync().Result;
                     objRespuesta = JsonConvert.DeserializeObject<Respuesta<bool>>(data);
+                    if (!objRespuesta.Success)
+                    {
+                        Error errorMessage = new Error();
+                        errorMessage.ErrorMessage = objRespuesta.strMensajeRespuesta;
+                        return View("Error", errorMessage);
+                    }
                 }
                 else
                 {
@@ -290,9 +323,18 @@ namespace Web.Interfaz.Controllers
 
                 string data = JsonConvert.SerializeObject(obj);
                 StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
+                Respuesta<bool> objRespuesta = new Respuesta<bool>();
                 HttpResponseMessage response = client.PutAsync(client.BaseAddress + "/tareas", content).Result;
                 if (response.IsSuccessStatusCode)
                 {
+                    string respuestaApi = response.Content.ReadAsStringAsync().Result;
+                    objRespuesta = JsonConvert.DeserializeObject<Respuesta<bool>>(respuestaApi);
+                    if (!objRespuesta.Success)
+                    {
+                        Error errorMessage = new Error();
+                        errorMessage.ErrorMessage = objRespuesta.strMensajeRespuesta;
+                        return View("Error", errorMessage);
+                    }
                     return RedirectToAction("Index");
                 }
                 else

@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@model Web.Interfaz.Models.Error
+
+
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
@@ -9,5 +13,18 @@
         <h1>Error.</h1>
         <h2>A ocurrido un error procesando la solicitud.</h2>
     </hgroup>
+    <br />
+    <hgroup>
+        @if (Model != null)
+        {
+            <h3>Descripcion.</h3>
+            <h5>@Model.ErrorMessage</h5>
+        }
+
+    </hgroup>
+    <br />
+    <div>
+        @Html.ActionLink("Regresar al Listado", "Index")
+    </div>
 </body>
 </html>

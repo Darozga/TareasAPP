@@ -483,6 +483,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\ColaboradorModel.cs" />
+    <Compile Include="Models\Error.cs" />
     <Compile Include="Models\EstadoModel.cs" />
     <Compile Include="Models\FilterModel.cs" />
     <Compile Include="Models\PrioridadModel.cs" />
