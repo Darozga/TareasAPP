@@ -1,0 +1,15 @@
+C:\Repos\TareasApp\WebAPI\WebAPI.Data\bin\Debug\net6.0\WebAPI.Data.deps.json
+C:\Repos\TareasApp\WebAPI\WebAPI.Data\bin\Debug\net6.0\WebAPI.Data.dll
+C:\Repos\TareasApp\WebAPI\WebAPI.Data\bin\Debug\net6.0\WebAPI.Data.pdb
+C:\Repos\TareasApp\WebAPI\WebAPI.Data\bin\Debug\net6.0\WebAPI.Model.dll
+C:\Repos\TareasApp\WebAPI\WebAPI.Data\bin\Debug\net6.0\WebAPI.Model.pdb
+C:\Repos\TareasApp\WebAPI\WebAPI.Data\obj\Debug\net6.0\WebAPI.Data.csproj.AssemblyReference.cache
+C:\Repos\TareasApp\WebAPI\WebAPI.Data\obj\Debug\net6.0\WebAPI.Data.GeneratedMSBuildEditorConfig.editorconfig
+C:\Repos\TareasApp\WebAPI\WebAPI.Data\obj\Debug\net6.0\WebAPI.Data.AssemblyInfoInputs.cache
+C:\Repos\TareasApp\WebAPI\WebAPI.Data\obj\Debug\net6.0\WebAPI.Data.AssemblyInfo.cs
+C:\Repos\TareasApp\WebAPI\WebAPI.Data\obj\Debug\net6.0\WebAPI.Data.csproj.CoreCompileInputs.cache
+C:\Repos\TareasApp\WebAPI\WebAPI.Data\obj\Debug\net6.0\WebAPI.Data.csproj.CopyComplete
+C:\Repos\TareasApp\WebAPI\WebAPI.Data\obj\Debug\net6.0\WebAPI.Data.dll
+C:\Repos\TareasApp\WebAPI\WebAPI.Data\obj\Debug\net6.0\refint\WebAPI.Data.dll
+C:\Repos\TareasApp\WebAPI\WebAPI.Data\obj\Debug\net6.0\WebAPI.Data.pdb
+C:\Repos\TareasApp\WebAPI\WebAPI.Data\obj\Debug\net6.0\ref\WebAPI.Data.dll

@@ -1,0 +1,173 @@
+﻿@model IEnumerable<Web.Interfaz.Models.TareaModel>
+@{
+    ViewBag.Title = "Tareas";
+}
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<h2>Listado de Tareas</h2>
+
+<p>
+    @Html.ActionLink("Crear Tarea", "Create")
+</p>
+
+@Html.ValidationMessage("Error", "", new { @class = "text-danger" })
+<table class="table">
+    <tr>
+        <th>
+            <form asp-action="Index" method="post">
+
+                <div class="form-group">
+                    <label for="Colaborador">Colaborador</label>
+                    @Html.DropDownList("Colaborador", new SelectList(ViewBag.colaboradores, "Id", "Nombre"), "Todos", new { @class = "form-control" })
+
+                </div>
+
+                <div class="form-group">
+                    <label for="Estado">Estado</label>
+                    @Html.DropDownList("Estado", new SelectList(ViewBag.estados, "Id", "Estado"), "Todos", new { @class = "form-control" })
+
+                </div>
+
+                <div class="form-group">
+                    <label for="Prioridad">Prioridad</label>
+                    @Html.DropDownList("Prioridad", new SelectList(ViewBag.prioridades, "Id", "Prioridad"), "Todos", new { @class = "form-control" })
+
+                </div>
+
+                <div class="form-group">
+                    <label for="FechaInicio">Fecha Inicio</label>
+                    @Html.TextBox("FechaInicio", null, new { type = "date", @class = "form-control", required = "required" })
+
+                </div>
+
+                <div class="form-group">
+                    <label for="FechaFin">Fecha Fin</label>
+                    @Html.TextBox("FechaFin", null, new { type = "date", @class = "form-control", required = "required" })
+                </div>
+                <div class="form-actions no-color">
+                    <p>
+
+                        <input type="submit" value="Filtrar" class="btn btn-primary" style="width:100%" />
+                    </p>
+                </div>
+            </form>
+            <div>
+                @Html.ActionLink("Limpiar Filtros", "Index")
+            </div>
+            @Html.ValidationMessage("CustomError", "", new { @class = "text-danger" })
+        </th>
+        <td>
+            <table class="table">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Descripcion)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Colaborador)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Estado)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Prioridad)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Fecha_Inicio)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Fecha_Fin)
+                    </th>
+                    <th>
+
+                    </th>
+                    <th>
+
+                    </th>
+                    <th></th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Descripcion)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Colaborador)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Estado)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Prioridad)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Fecha_Inicio)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Fecha_Fin)
+                        </td>
+                        <td>
+                            @if (item.Estado_Id == 3)
+                            {
+                                <button type="button" class="btn btn-primary" disabled>Editar</button>
+                            }
+                            else
+                            {
+                                @Html.ActionLink("Editar", "Editar", new { id = item.Id }, new { @class = "btn btn-primary" })
+                            }
+
+                        </td>
+                        <td>
+                            @if (item.Estado_Id == 2)
+                            {
+                                <button type="button" class="btn btn-primary" disabled>Eliminar</button>
+                            }
+                            else
+                            {
+                                <a id="deleteItem" class="deleteItem btn btn-primary" data-target="#basic"
+                                   data-toggle="modal"
+                                   data-path="@Url.Action("Eliminar", "Tareas", new { id = item.Id, estado = item.Estado_Id})">Eliminar</a>
+                            }                            
+                        </td>
+                    </tr>
+                }
+
+            </table>
+        </td>
+    </tr>
+</table>
+
+<div class="modal fade" id="basic" tabindex="-1" role="basic" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title">Delete Confirmation</h4>
+            </div>
+            <div class="modal-body">
+                Estas seguro que deseas eliminar esta tarea?
+            </div>
+            <div class="modal-footer">
+                <button data-dismiss="modal" type="button" class="btn btn-default">Cancelar</button>
+                <button id="btnContinueDelete" type="button" class="btn btn-primary">Eliminar</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var path_to_delete;
+
+        $(".deleteItem").click(function (e) {
+            path_to_delete = $(this).data('path');
+        });
+
+        $('#btnContinueDelete').click(function () {
+            window.location = path_to_delete;
+        });
+    </script>
+
+
+
+
